@@ -41,6 +41,9 @@
 #include <SX126x-Arduino.h>
 /** Add your required includes after SX126x-Arduino.h */
 
+#include <U8g2lib.h>
+
+
 #if MY_DEBUG > 0
     #define MYLOG(tag, ...)            \
         do                             \

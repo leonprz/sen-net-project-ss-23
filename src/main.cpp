@@ -16,9 +16,12 @@ time_t timeout;
 // actual state of one led
 uint8_t led_state = HIGH;
 
+U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
+
 // forward declarations (needed for platformIO)
 void initLeds();
 void initSerial();
+void initDisplay();
 
 /**
  * @brief Application specific setup functions
@@ -28,11 +31,16 @@ void setup(void)
 {
   initLeds();
   initSerial();
+  initDisplay();
 
   // ADD YOUR CODE HERE
 
   // Keep the actual timestamp for the loop
   timeout = millis();
+
+  u8g2.drawStr(0, 20, "Hello World!");
+  u8g2.sendBuffer();
+
   // Setup finished...
   MYLOG("SETUP", "Starting LOOP...");
 }
@@ -101,4 +109,10 @@ void initSerial()
   Serial.print(EXAMPLE_TEXT);
   Serial.printf("SW Version %d.%d.%d\n", SW_VERSION_1, SW_VERSION_2, SW_VERSION_3);
   Serial.print("============================\n");
+}
+
+void initDisplay() {
+  u8g2.begin();
+  u8g2.setFont(u8g2_font_ncenB14_tr);
+  u8g2.clearBuffer();
 }
