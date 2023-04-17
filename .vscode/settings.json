@@ -1,0 +1,26 @@
+{
+    "cSpell.words": [
+        "HBRS",
+        "Hochschule",
+        "Sieg",
+        "Netze",
+        "Sensorik",
+        "Roobi",
+        "Rademacher",
+        "buffsize",
+        "DATARATE",
+        "datarates",
+        "DUTYCYCLE",
+        "JOINREQ",
+        "LORAMAC",
+        "LORAWAN",
+        "MYLOG",
+        "NBTRIALS",
+        "millis",
+        "OTAA",
+        "RAK's",
+        "rssi",
+        "unconfirm"
+    ],
+    "cmake.configureOnOpen": false
+}
