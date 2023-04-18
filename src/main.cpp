@@ -13,6 +13,7 @@
 #include "led.hpp"
 #include "serial.hpp"
 #include "display.hpp"
+#include "amb_light.hpp"
 
 // variable to keep a timestamp
 time_t timeout;
@@ -28,6 +29,7 @@ void setup()
   initLeds();
   initSerial();
   initDisplay();
+  initAmbLight();
 
   digitalWrite(LED_GREEN, HIGH);
 
@@ -70,6 +72,9 @@ void loop()
   {
     digitalWrite(LED_BLUE, led_state);
     digitalWrite(LED_GREEN, !led_state);
+    display.clearBuffer();
+    display.drawStr(0, 25, std::to_string(amb_light.readResult().lux).c_str());
+    display.sendBuffer();
     led_state = !led_state;
     timeout = millis();
   }

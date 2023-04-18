@@ -40,6 +40,7 @@
 /** Include the SX126x-API */
 #include <SX126x-Arduino.h>
 /** Add your required includes after SX126x-Arduino.h */
+#include <string>
 
 
 #if MY_DEBUG > 0
