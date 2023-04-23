@@ -31,5 +31,10 @@
         "vector": "cpp",
         "string_view": "cpp",
         "initializer_list": "cpp"
-    }
+    },
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "files.encoding": "utf8"
 }
