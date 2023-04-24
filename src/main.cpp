@@ -103,7 +103,6 @@ void loop()
 			display.drawStr(0, 15, (std::to_string(env_sensor.temperature) + " *C").c_str());
 			display.drawStr(0, 30, (std::to_string(env_sensor.humidity) + " %").c_str());
 			display.drawStr(0, 45, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
-			display.drawStr(0, 60, (std::to_string(env_sensor.gas_resistance / 1000.0) + " kOhm").c_str());
 		}
 		display.sendBuffer();
 
