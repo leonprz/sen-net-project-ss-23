@@ -8,7 +8,7 @@
 **/
 
 #define EXAMPLE_TEXT "Template\n"
-#define DISPLAY_PAGES 2
+#define DISPLAY_PAGES 3
 
 #include "main.h"
 #include "led.hpp"
@@ -16,6 +16,7 @@
 #include "display.hpp"
 #include "sensors/amb_light.hpp"
 #include "sensors/env_sensor.hpp"
+#include "sensors/gnss.hpp"
 
 // variable to keep a timestamp
 time_t timeout;
@@ -50,6 +51,7 @@ void setup()
 	initDisplay();
 	initAmbLight();
 	initEnvSensor();
+	initGNSS();
 
 	digitalWrite(LED_BLUE, LOW);
 	digitalWrite(LED_GREEN, HIGH);
@@ -103,6 +105,22 @@ void loop()
 			display.drawStr(0, 15, (std::to_string(env_sensor.temperature) + " *C").c_str());
 			display.drawStr(0, 30, (std::to_string(env_sensor.humidity) + " %").c_str());
 			display.drawStr(0, 45, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
+		}
+		else if (display_paging == 2)
+		{
+			uint8_t fixType = gnss.getFixType();
+			if (fixType >= 2)
+			{
+				display.drawStr(0, 15, std::to_string(gnss.getLatitude()).c_str());
+				display.drawStr(0, 30, std::to_string(gnss.getLongitude()).c_str());
+				display.drawStr(0, 45, std::to_string(gnss.getAltitude()).c_str());
+				display.drawStr(0, 60, std::to_string(gnss.getHeading()).c_str());
+			}
+			else
+			{
+				display.drawStr(0, 15, "Insufficient");
+				display.drawStr(0, 30, ("FixType = " + std::to_string(fixType)).c_str());
+			}
 		}
 		display.sendBuffer();
 
