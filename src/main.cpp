@@ -47,6 +47,7 @@ void setup()
 	initSerial();
 	initDisplay();
 	initAmbLight();
+	initEnvSensor();
 
 	digitalWrite(LED_BLUE, LOW);
 	digitalWrite(LED_GREEN, HIGH);
