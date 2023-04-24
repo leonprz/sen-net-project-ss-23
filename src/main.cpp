@@ -8,6 +8,7 @@
 **/
 
 #define EXAMPLE_TEXT "Template\n"
+#define DISPLAY_PAGES 2
 
 #include "main.h"
 #include "led.hpp"
@@ -20,6 +21,7 @@
 time_t timeout;
 // actual state of one led
 uint8_t led_state = HIGH;
+uint8_t display_paging = 0;
 
 /**
  * @brief Application specific setup functions
@@ -92,13 +94,21 @@ void loop()
 		}
 
 		display.clearBuffer();
-		display.drawStr(0, 15, (std::to_string(amb_light.readResult().lux) + " Lux").c_str());
-		display.drawStr(0, 30, (std::to_string(env_sensor.temperature) + " *C").c_str());
-		display.drawStr(0, 45, (std::to_string(env_sensor.humidity) + " %").c_str());
-		display.drawStr(0, 60, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
+		if (display_paging == 0)
+		{
+			display.drawStr(0, 15, (std::to_string(amb_light.readResult().lux) + " Lux").c_str());
+		}
+		else if (display_paging == 1)
+		{
+			display.drawStr(0, 15, (std::to_string(env_sensor.temperature) + " *C").c_str());
+			display.drawStr(0, 30, (std::to_string(env_sensor.humidity) + " %").c_str());
+			display.drawStr(0, 45, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
+			display.drawStr(0, 60, (std::to_string(env_sensor.gas_resistance / 1000.0) + " kOhm").c_str());
+		}
 		display.sendBuffer();
 
 		led_state = !led_state;
+		display_paging = ++display_paging % DISPLAY_PAGES;
 		timeout = millis();
 	}
 }
