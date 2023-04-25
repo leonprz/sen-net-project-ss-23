@@ -15,4 +15,5 @@ void initEnvSensor()
 	env_sensor.setHumidityOversampling(BME680_OS_2X);
 	env_sensor.setPressureOversampling(BME680_OS_4X);
 	env_sensor.setIIRFilterSize(BME680_FILTER_SIZE_3);
+	env_sensor.setGasHeater(0, 0); // disables gas heater
 }
