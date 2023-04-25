@@ -42,6 +42,5 @@
 
 // ADD YOUR CODE HERE
 #define LOOP_TIMEOUT 1000
-#define SOIL_PIN WB_A1
 
 #endif  // MAIN_H

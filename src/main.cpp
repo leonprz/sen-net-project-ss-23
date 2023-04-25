@@ -18,6 +18,7 @@
 #include "sensors/env_sensor.hpp"
 #include "sensors/gnss.hpp"
 #include "sensors/motion_sensor.hpp"
+#include "sensors/soil_sensor.hpp"
 
 // variable to keep a timestamp
 time_t timeout;
@@ -54,6 +55,7 @@ void setup()
 	initEnvSensor();
 	initGNSS();
 	initMotionSensor();
+	initSoilSensor();
 
 	digitalWrite(LED_BLUE, LOW);
 	digitalWrite(LED_GREEN, HIGH);
@@ -102,6 +104,7 @@ void loop()
 		{
 			display.drawStr(0, 15, (std::to_string(amb_light.readResult().lux) + " Lux").c_str());
 			display.drawStr(0, 30, ("Motion = " + std::to_string(digitalRead(PIR_PIN))).c_str());
+			display.drawStr(0, 45, ("Soil = " + std::to_string(analogRead(SOIL_PIN) * (3.3 / 1023)) + " V").c_str());
 		}
 		else if (display_paging == 1)
 		{
