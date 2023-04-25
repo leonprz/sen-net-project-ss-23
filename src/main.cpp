@@ -17,6 +17,7 @@
 #include "sensors/amb_light.hpp"
 #include "sensors/env_sensor.hpp"
 #include "sensors/gnss.hpp"
+#include "sensors/motion_sensor.hpp"
 
 // variable to keep a timestamp
 time_t timeout;
@@ -52,6 +53,7 @@ void setup()
 	initAmbLight();
 	initEnvSensor();
 	initGNSS();
+	initMotionSensor();
 
 	digitalWrite(LED_BLUE, LOW);
 	digitalWrite(LED_GREEN, HIGH);
@@ -99,6 +101,7 @@ void loop()
 		if (display_paging == 0)
 		{
 			display.drawStr(0, 15, (std::to_string(amb_light.readResult().lux) + " Lux").c_str());
+			display.drawStr(0, 30, ("Motion = " + std::to_string(digitalRead(PIR_PIN))).c_str());
 		}
 		else if (display_paging == 1)
 		{
