@@ -117,10 +117,10 @@ void loop()
 			uint8_t fixType = gnss.getFixType();
 			if (fixType >= 2)
 			{
-				display.drawStr(0, 15, std::to_string(gnss.getLatitude()).c_str());
-				display.drawStr(0, 30, std::to_string(gnss.getLongitude()).c_str());
-				display.drawStr(0, 45, std::to_string(gnss.getAltitude()).c_str());
-				display.drawStr(0, 60, std::to_string(gnss.getHeading()).c_str());
+				display.drawStr(0, 15, (std::to_string(gnss.getLatitude() * 10e-8) + " N").c_str());
+				display.drawStr(0, 30, (std::to_string(gnss.getLongitude() * 10e-8) + " E").c_str());
+				display.drawStr(0, 45, (std::to_string(gnss.getAltitude()) + " mm").c_str());
+				display.drawStr(0, 60, (std::to_string(gnss.getAltitudeMSL()) + " mm").c_str());
 			}
 			else
 			{
