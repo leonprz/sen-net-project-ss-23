@@ -16,15 +16,15 @@
 //***********************************************/
 // ; major version increase on API change / not backwards compatible
 #ifndef SW_VERSION_1
-  #define SW_VERSION_1 1
+#define SW_VERSION_1 1
 #endif
 // ; minor version increase on API change / backward compatible
 #ifndef SW_VERSION_2
-  #define SW_VERSION_2 0
+#define SW_VERSION_2 0
 #endif
 // ; patch version increase on bugfix, no affect on API
 #ifndef SW_VERSION_3
-  #define SW_VERSION_3 0
+#define SW_VERSION_3 0
 #endif
 
 /** Include library's */
@@ -42,5 +42,6 @@
 
 // ADD YOUR CODE HERE
 #define LOOP_TIMEOUT 1000
+#define LORA_LOOP_TIMEOUT 30000
 
-#endif  // MAIN_H
+#endif // MAIN_H

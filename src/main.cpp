@@ -14,6 +14,7 @@
 #include "led.hpp"
 #include "serial.hpp"
 #include "display.hpp"
+#include "lorawan.hpp"
 #include "sensors/amb_light.hpp"
 #include "sensors/env_sensor.hpp"
 #include "sensors/gnss.hpp"
@@ -22,6 +23,8 @@
 
 // variable to keep a timestamp
 time_t timeout;
+time_t timeout_lora;
+
 // actual state of one led
 uint8_t led_state = HIGH;
 uint8_t display_paging = 0;
@@ -51,6 +54,7 @@ void setup()
 
 	initSerial();
 	initDisplay();
+	initLoRaWan();
 	initAmbLight();
 	initEnvSensor();
 	initGNSS();
@@ -133,5 +137,15 @@ void loop()
 		led_state = !led_state;
 		display_paging = ++display_paging % DISPLAY_PAGES;
 		timeout = millis();
+	}
+
+	if ((millis() - timeout_lora) > LORA_LOOP_TIMEOUT)
+	{
+		if (lora_isJoined)
+		{
+			lora_send_data();
+		}
+
+		timeout_lora = millis();
 	}
 }
