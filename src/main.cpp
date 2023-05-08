@@ -14,7 +14,7 @@
 #include "led.hpp"
 #include "serial.hpp"
 #include "display.hpp"
-#include "lorawan.hpp"
+#include "lorawan/lorawan.hpp"
 #include "sensors/amb_light.hpp"
 #include "sensors/env_sensor.hpp"
 #include "sensors/gnss.hpp"
