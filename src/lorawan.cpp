@@ -30,7 +30,7 @@ void initLoRaWan()
 	uint32_t err_code = lmh_init(&lora_callbacks, lora_params, LORAWAN_DO_OTAA, lora_currClass, lora_currRegion);
 	if (err_code != 0)
 	{
-		MYLOG("LORAWAN", "lmh_init failed - %d", err_code);
+		MYLOG("LORAWAN", "lmh_init failed - %lu", err_code);
 	}
 
 	lmh_join();
@@ -49,7 +49,7 @@ void lora_join_failed_handler()
 
 void lora_rx_handler(lmh_app_data_t *appData)
 {
-	MYLOG("LORAWAN", "LoRa Packet received on port %d, size:%d, rssi:%d, snr:%d, data:%s", appData->port, appData->buffsize, appData->rssi, appData->snr, appData->buffer);
+	MYLOG("LORAWAN", "LoRa Packet received on port %u, size:%u, rssi:%d, snr:%u, data:%p", appData->port, appData->buffsize, appData->rssi, appData->snr, appData->buffer);
 }
 
 void lora_confirm_class_handler(DeviceClass_t devClass)
@@ -81,15 +81,17 @@ void lora_send_data()
 	lora_appData.buffer[i++] = '!';
 	lora_appData.buffsize = i;
 
+	MYLOG("LORAWAN", "approx. time on air : %lu ms", Radio.TimeOnAir(MODEM_LORA, lora_appData.buffsize));
+
 	lmh_error_status err = lmh_send(&lora_appData, lora_currConfirm);
 	if (err == LMH_SUCCESS)
 	{
 		lora_msgCount++;
-		MYLOG("LORAWAN", "lmh_send ok - %d", lora_msgCount);
+		MYLOG("LORAWAN", "lmh_send ok - %lu", lora_msgCount);
 	}
 	else
 	{
 		lora_msgFailCount++;
-		MYLOG("LORAWAN", "lmh_send failed - %d", lora_msgFailCount);
+		MYLOG("LORAWAN", "lmh_send failed - %lu", lora_msgFailCount);
 	}
 }
