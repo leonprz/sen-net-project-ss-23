@@ -1,4 +1,5 @@
 #include "lorawan.hpp"
+#include "encoding.hpp"
 #include "debug.hpp"
 
 DeviceClass_t lora_currClass = CLASS_A;
@@ -73,12 +74,12 @@ void lora_send_data()
 
 	// WRITE PAYLOAD
 	uint32_t i = 0;
-	lora_appData.buffer[i++] = 'H';
-	lora_appData.buffer[i++] = 'E';
-	lora_appData.buffer[i++] = 'L';
-	lora_appData.buffer[i++] = 'L';
-	lora_appData.buffer[i++] = 'O';
-	lora_appData.buffer[i++] = '!';
+	uint32_t ambLight = encode_ambLight();
+	lora_appData.buffer[i++] = ambLight & 0xFF;
+	lora_appData.buffer[i++] = (ambLight >> 8) & 0xFF;
+	lora_appData.buffer[i++] = (ambLight >> 16) & 0xFF;
+	lora_appData.buffer[i++] = (ambLight >> 24) & 0xFF;
+	uint32_t envSensor = encode_envSensor();
 	lora_appData.buffsize = i;
 
 	MYLOG("LORAWAN", "approx. time on air : %lu ms", Radio.TimeOnAir(MODEM_LORA, lora_appData.buffsize));
