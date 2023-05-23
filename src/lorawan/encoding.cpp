@@ -3,14 +3,13 @@
 #include "sensors/env_sensor.hpp"
 #include "debug.hpp"
 
-// uint24_t
-uint32_t encode_ambLight()
+uint24 encode_ambLight()
 {
 	float lux = amb_light.readResult().lux;
 
 	// to be changed
 
-	return (uint32_t)lux;
+	return (uint24)lux;
 }
 
 uint32_t encode_envSensor()

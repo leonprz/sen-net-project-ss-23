@@ -74,11 +74,10 @@ void lora_send_data()
 
 	// WRITE PAYLOAD
 	uint32_t i = 0;
-	uint32_t ambLight = encode_ambLight();
+	uint24 ambLight = encode_ambLight();
 	lora_appData.buffer[i++] = ambLight & 0xFF;
 	lora_appData.buffer[i++] = (ambLight >> 8) & 0xFF;
 	lora_appData.buffer[i++] = (ambLight >> 16) & 0xFF;
-	lora_appData.buffer[i++] = (ambLight >> 24) & 0xFF;
 	uint32_t envSensor = encode_envSensor();
 	lora_appData.buffsize = i;
 
