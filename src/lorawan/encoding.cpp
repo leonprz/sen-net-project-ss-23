@@ -20,13 +20,13 @@ uint32_t encode_envSensor()
 
 	uint32_t data = 0;
 	// 0-7: temperature
-	data |= (uint32_t)temperature << 1;
-	data |= temperature - (uint32_t)temperature < 0.5 ? 0 : 1;
+	data |= (uint32_t)temperature;
+	data |= (temperature - (uint32_t)temperature < 0.5 ? 0 : 1) << 7;
 	// 8-15: humidity
-	data |= (uint32_t)humidity << 9;
-	data |= (humidity - (uint32_t)humidity < 0.5 ? 0 : 1) << 8;
+	data |= (uint32_t)humidity << 8;
+	data |= (humidity - (uint32_t)humidity < 0.5 ? 0 : 1) << 15;
 	// 16-31: pressure
-	data |= pressure << 17;
+	data |= pressure << 16;
 
 	return data;
 }
