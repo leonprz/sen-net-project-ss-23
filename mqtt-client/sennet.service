@@ -1,0 +1,14 @@
+[Unit]
+Description=SenNet Handler Script (Python)
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/python3 /root/sennet-mqtt.py
+Restart=on-failure
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+Type=simple
+User=root
+
+[Install]
+WantedBy=default.target
