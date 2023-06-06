@@ -5,7 +5,6 @@ HOST='root@10.20.111.212'
 
 sftp "$HOST" <<EOF
 	lcd "$DIR"
-	cp /root/sennet-mqtt/ /root/sennet-mqtt.bak/
 	mkdir /root/sennet-mqtt/
 	cd /root/sennet-mqtt/
 	put sennet-mqtt.py

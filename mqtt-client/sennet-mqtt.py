@@ -7,7 +7,7 @@ import random
 import sys
 
 
-if (3, 9) < sys.version_info < (4,):
+if (3, 9) >= sys.version_info >= (4,):
     raise Exception('Python 3.9 or a more recent version is required.')
 
 if sys.version_info >= (3, 10):
