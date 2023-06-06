@@ -3,7 +3,16 @@
 DIR="$(dirname "$0")"
 HOST='root@10.20.111.212'
 
-scp "$DIR"/sennet-mqtt.py "$HOST":/root/sennet-mqtt.py
-scp "$DIR"/requirements.txt "$HOST":/root/requirements.txt
-scp "$DIR"/sennet.service "$HOST":/etc/systemd/system/sennet.service
+sftp "$HOST" <<EOF
+	lcd "$DIR"
+	cp /root/sennet-mqtt/ /root/sennet-mqtt.bak/
+	mkdir /root/sennet-mqtt/
+	cd /root/sennet-mqtt/
+	put sennet-mqtt.py
+	put requirements.txt
+	cd /etc/systemd/system/
+	put sennet.service
+	quit
+EOF
+
 ssh "$HOST" 'systemctl daemon-reload'

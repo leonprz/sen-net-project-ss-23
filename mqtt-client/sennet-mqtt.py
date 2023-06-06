@@ -1,12 +1,20 @@
 import paho.mqtt.client as mqtt
 from influxdb import InfluxDBClient
-from datetime import datetime
+from typing import Any
 import json
 import base64
 import random
+import sys
 
 
-Userdata = dict[str, object | InfluxDBClient]
+if (3, 9) < sys.version_info < (4,):
+    raise Exception('Python 3.9 or a more recent version is required.')
+
+if sys.version_info >= (3, 10):
+    Userdata = dict[str, InfluxDBClient | Any]
+else:
+    from typing import Dict, Union
+    Userdata = Dict[str, Union[InfluxDBClient, Any]]
 
 
 mqtt_server: str = '10.20.111.210'
@@ -65,11 +73,11 @@ def on_message(client: mqtt.Client, userdata: Userdata, msg: mqtt.MQTTMessage):
     except Exception:
         print("Couldn't write to InfluxDB")
 
-def decode_payload(payload: str):
-    formatted = base64.b64decode(payload).hex(" ").upper()
+def decode_payload(frm_payload: str):
+    payload: bytes = base64.b64decode(frm_payload)
 
     return {
-        'payload': formatted,
+        'payload': payload.hex(" ").upper(),
         'random': random.randint(0, 100),
     }
 

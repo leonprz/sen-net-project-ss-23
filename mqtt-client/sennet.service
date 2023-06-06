@@ -3,7 +3,7 @@ Description=SenNet Handler Script (Python)
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/python3 /root/sennet-mqtt.py
+ExecStart=/usr/local/bin/python3 /root/sennet-mqtt/sennet-mqtt.py
 Restart=on-failure
 RestartSec=3
 Environment=PYTHONUNBUFFERED=1
