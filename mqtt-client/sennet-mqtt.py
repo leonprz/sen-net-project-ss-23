@@ -100,7 +100,7 @@ def decode_envSensor(payload: bytes) -> (float, float, int):
     
     pres = int.from_bytes(payload[2:4], byteorder='little', signed=False)
 
-    return (temp, hum, pres)
+    return (float(temp), float(hum), pres)
 
 try:
     with open('mqtt-password.txt', 'r') as f:

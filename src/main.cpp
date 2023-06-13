@@ -81,6 +81,7 @@ void setup()
 
 	// Keep the actual timestamp for the loop
 	timeout_display = millis();
+	timeout_lora = millis();
 
 	// Setup finished...
 	MYLOG("SETUP", "Starting LOOP...");
