@@ -30,14 +30,14 @@ influx_password: str = ''
 influx_database: str = 'testDB'
 
 
-def on_connect(client: mqtt.Client, userdata, flags: dict, rc: int):
+def on_connect(client: mqtt.Client, userdata, flags: dict, rc: int) -> None:
     if rc == 0:
         print('Connected to MQTT Broker!')
         client.subscribe(mqtt_topic)
     else:
         print(f'Failed to connect, return code {rc}')
 
-def on_disconnect(client: mqtt.Client, userdata, rc: int):
+def on_disconnect(client: mqtt.Client, userdata, rc: int) -> None:
     print('Disconnecting...')
 
     if rc == 0:
@@ -45,7 +45,7 @@ def on_disconnect(client: mqtt.Client, userdata, rc: int):
     else:
         print(f'Disconnected INVALID, return code {rc}')
 
-def on_message(client: mqtt.Client, userdata: Userdata, msg: mqtt.MQTTMessage):
+def on_message(client: mqtt.Client, userdata: Userdata, msg: mqtt.MQTTMessage) -> None:
     json_msg = json.loads(msg.payload.decode())
     #print(f'Received Msg in `{msg.topic}` topic: {json.dumps(json_msg, indent=2)}')
 
@@ -58,7 +58,7 @@ def on_message(client: mqtt.Client, userdata: Userdata, msg: mqtt.MQTTMessage):
 
     db_data = [
         {
-            'measurement': 'test',
+            'measurement': 'sensor',
             'time': json_msg['received_at'],
             'tags': {
                 'device_id': device_id,
@@ -73,14 +73,34 @@ def on_message(client: mqtt.Client, userdata: Userdata, msg: mqtt.MQTTMessage):
     except Exception:
         print("Couldn't write to InfluxDB")
 
-def decode_payload(frm_payload: str):
+def decode_payload(frm_payload: str) -> dict[str, Any]:
     payload: bytes = base64.b64decode(frm_payload)
 
+    lux = decode_ambLight(payload[0:3])
+    envSensor = decode_envSensor(payload[3:35])
+
     return {
-        'payload': payload.hex(" ").upper(),
-        'random': random.randint(0, 100),
+        'lux': lux,
+        'temperature': envSensor[0],
+        'humidity': envSensor[1],
+        'pressure': envSensor[2],
     }
 
+def decode_ambLight(payload: bytes) -> int:
+    return int.from_bytes(payload, byteorder='little', signed=False)
+
+def decode_envSensor(payload: bytes) -> (float, float, int):
+    temp = payload[0] & 0b0111_1111
+    if (payload[0] & 0b1000_0000):
+        temp += .5
+
+    hum = payload[1] & 0b0111_1111
+    if (payload[1] & 0b1000_0000):
+        hum += .5
+    
+    pres = int.from_bytes(payload[2:4], byteorder='little', signed=False)
+
+    return (temp, hum, pres)
 
 try:
     with open('mqtt-password.txt', 'r') as f:
