@@ -79,6 +79,10 @@ void lora_send_data()
 	lora_appData.buffer[i++] = (ambLight >> 8) & 0xFF;
 	lora_appData.buffer[i++] = (ambLight >> 16) & 0xFF;
 	uint32_t envSensor = encode_envSensor();
+	lora_appData.buffer[i++] = envSensor & 0xFF;
+	lora_appData.buffer[i++] = (envSensor >> 8) & 0xFF;
+	lora_appData.buffer[i++] = (envSensor >> 16) & 0xFF;
+	lora_appData.buffer[i++] = (envSensor >> 24) & 0xFF;
 	lora_appData.buffsize = i;
 
 	MYLOG("LORAWAN", "approx. time on air : %lu ms", Radio.TimeOnAir(MODEM_LORA, lora_appData.buffsize));
