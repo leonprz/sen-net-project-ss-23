@@ -23,7 +23,7 @@
 #include "sensors/soil_sensor.hpp"
 
 // variable to keep a timestamp
-time_t timeout;
+time_t timeout_display;
 time_t timeout_lora;
 
 // actual state of one led
@@ -80,7 +80,7 @@ void setup()
 	digitalWrite(LED_GREEN, LOW);
 
 	// Keep the actual timestamp for the loop
-	timeout = millis();
+	timeout_display = millis();
 
 	// Setup finished...
 	MYLOG("SETUP", "Starting LOOP...");
@@ -93,7 +93,7 @@ void setup()
 void loop()
 {
 	// Simple non-blocking loop
-	if ((millis() - timeout) > LOOP_TIMEOUT)
+	if ((millis() - timeout_display) > DISPLAY_LOOP_TIMEOUT)
 	{
 		digitalWrite(LED_BLUE, led_state);
 		digitalWrite(LED_GREEN, !led_state);
@@ -137,7 +137,7 @@ void loop()
 
 		led_state = !led_state;
 		display_paging = ++display_paging % DISPLAY_PAGES;
-		timeout = millis();
+		timeout_display = millis();
 	}
 
 	if ((millis() - timeout_lora) > LORA_LOOP_TIMEOUT)

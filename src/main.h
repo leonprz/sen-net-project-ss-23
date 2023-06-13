@@ -41,7 +41,7 @@
 #include "debug.hpp"
 
 // ADD YOUR CODE HERE
-#define LOOP_TIMEOUT 1000
-#define LORA_LOOP_TIMEOUT 60000
+#define DISPLAY_LOOP_TIMEOUT 1000 /* ms */
+#define LORA_LOOP_TIMEOUT 5*60000 /* ms */ //timeout according to TTN fair use policy
 
 #endif // MAIN_H
