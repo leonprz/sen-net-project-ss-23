@@ -3,7 +3,6 @@ from influxdb import InfluxDBClient
 from typing import Any
 import json
 import base64
-import random
 import sys
 
 
@@ -27,7 +26,7 @@ influx_host: str = 'localhost'
 influx_port: int = 8086
 influx_user : str = 'root'
 influx_password: str = ''
-influx_database: str = 'testDB'
+influx_database: str = 'sennet'
 
 
 def on_connect(client: mqtt.Client, userdata, flags: dict, rc: int) -> None:
