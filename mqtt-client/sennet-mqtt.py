@@ -19,13 +19,13 @@ else:
 mqtt_server: str = '10.20.111.210'
 mqtt_port: int = 1883
 mqtt_user: str = 'group02'
-mqtt_password: str = None  # will be read from file 'mqtt-password.txt'
+mqtt_password: str = None  # if None, password will be read from file 'mqtt-password.txt'
 mqtt_topic: str = 'v3/sennet@ttn/devices/+/up'  # the MQTT topic to subscribe to
 
 influx_host: str = 'localhost'
 influx_port: int = 8086
 influx_user : str = 'root'
-influx_password: str = ''
+influx_password: str = None  # if None, password will be read from file 'influxdb-password.txt'
 influx_database: str = 'sennet'
 
 
@@ -101,12 +101,20 @@ def decode_envSensor(payload: bytes) -> (float, float, int):
 
     return (float(temp), float(hum), pres)
 
-try:
-    with open('mqtt-password.txt', 'r') as f:
-        mqtt_password = f.read().rstrip()
-except IOError:
-    print('Could not read MQTT password file.')
-    exit(1)
+if mqtt_password is None:
+    try:
+        with open('mqtt-password.txt', 'r') as f:
+            mqtt_password = f.read().rstrip()
+    except IOError:
+        print('Could not read mqtt-password.txt')
+        exit(1)
+if influx_password is None:
+    try:
+        with open('influxdb-password.txt', 'r') as f:
+            influx_password = f.read().rstrip()
+    except IOError:
+        print('Could not read influxdb-password.txt')
+        exit(1)
 
 client = mqtt.Client(userdata={
     'influx_client': InfluxDBClient(
