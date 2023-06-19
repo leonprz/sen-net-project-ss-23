@@ -6,6 +6,7 @@ RAK1903 WisBlock Ambient Light Sensor Module:
 
 RAK1906 WisBlock Environmental Sensor: 
 (https://docs.rakwireless.com/Product-Categories/WisBlock/RAK1906/Datasheet/#hardware)
+
 Temperature:
 - Temperature range: -40 °C to 85 °C
 - Absolute temperature accuracy at 25°C: ±0.5
