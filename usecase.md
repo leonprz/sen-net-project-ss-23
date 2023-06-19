@@ -1,4 +1,5 @@
-###Use Case: Air Quality Monitoring
+# Use Case: Air Quality Monitoring
+## How do our measured values impact air quality?
 
 1. Temperature: Higher temperatures can accelerate the formation of ground-level ozone and increase chemical reactions that impact pollutant concentrations.
 -> Higher Temperature means higher pollutant concentrations
@@ -11,6 +12,6 @@
 
 4. Sunshine: Sunshine can cause some pollutants to chemically react, resulting in higher pollutant concentration
 
-Sources:
+# Sources
 - https://scied.ucar.edu/learning-zone/air-quality/how-weather-affects-air-quality
 - https://airly.org/en/how-does-humidity-affect-air-quality-all-you-need-to-know/#:~:text=What's%20the%20connection%20between%20humidity,dust%20mites%2C%20and%20other%20allergens.

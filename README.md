@@ -3,7 +3,9 @@
 - [Installation](#installation)
 - etc.
 ## Anwendung
-txt
+Im Rahmen des Moduls "Smart City: Sensorik und Netze" haben wir, als beispielhaften Anwendungsfall, ein System zur Überwachung der Luftqualität entwickelt. Dazu erfolgt die Messung der Temperatur, Luftfeuchtigkeit, Luftdruck und Lichteinstrahlung mittels verschiedener Sensoren.
+
+Für eine Erklärung auf welche Weise die einzelnen Messwerte Einfluss auf die Luftqualität haben, siehe [usecase.md](./usecase.md).
 ## Installation
 ### Voraussetzungen
 - Hardware (RAK Wireless WisBlock Modular System)
@@ -14,6 +16,7 @@ txt
 	- Sensor Modules
 		- RAK1903 WisBlock Ambient Light Sensor Module
 		- RAK1906 WisBlock Environmental Sensor Module
+		- für technische Details der Sensoren, siehe [sensor_details.md](./sensor_details.md)
 - The Things Stack (https://thethingsindustries.com/stack)
 - MQTT Broker (z.B. Eclipse Mosquitto <https://mosquitto.org>)
 - Python 3.9+ (https://python.org)
@@ -46,4 +49,5 @@ WorkingDirectory=/root/sennet-mqtt/
 ## Software
 ### Payload
 ### uint24
+### lora?
 ### ...
