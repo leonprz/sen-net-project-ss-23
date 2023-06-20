@@ -1,0 +1,801 @@
+{
+	"annotations": {
+		"list": [
+			{
+				"builtIn": 1,
+				"datasource": {
+					"type": "grafana",
+					"uid": "-- Grafana --"
+				},
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"target": {
+					"limit": 100,
+					"matchAny": false,
+					"tags": [],
+					"type": "dashboard"
+				},
+				"type": "dashboard"
+			}
+		]
+	},
+	"editable": true,
+	"fiscalYearStartMonth": 0,
+	"graphTooltip": 0,
+	"id": 2,
+	"links": [],
+	"liveNow": true,
+	"panels": [
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"links": [],
+					"mappings": [],
+					"max": 100,
+					"min": 0,
+					"noValue": "NaN",
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "yellow",
+								"value": null
+							},
+							{
+								"color": "#73BF69",
+								"value": 30
+							},
+							{
+								"color": "blue",
+								"value": 60
+							}
+						]
+					},
+					"unit": "humidity"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 6,
+				"x": 0,
+				"y": 0
+			},
+			"id": 4,
+			"links": [
+				{
+					"targetBlank": true,
+					"title": "Threshold values (https://doi.org/10.1016/j.proeng.2017.10.384)",
+					"url": "https://doi.org/10.1016/j.proeng.2017.10.384"
+				}
+			],
+			"options": {
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showThresholdLabels": true,
+				"showThresholdMarkers": true
+			},
+			"pluginVersion": "9.4.3",
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"humidity"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Humidity",
+			"type": "gauge"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "dark-blue",
+								"value": null
+							},
+							{
+								"color": "blue",
+								"value": -10
+							},
+							{
+								"color": "super-light-blue",
+								"value": 0
+							},
+							{
+								"color": "yellow",
+								"value": 15
+							},
+							{
+								"color": "orange",
+								"value": 25
+							},
+							{
+								"color": "red",
+								"value": 35
+							},
+							{
+								"color": "dark-red",
+								"value": 40
+							}
+						]
+					},
+					"unit": "celsius"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 6,
+				"x": 6,
+				"y": 0
+			},
+			"id": 10,
+			"options": {
+				"colorMode": "value",
+				"graphMode": "none",
+				"justifyMode": "auto",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"textMode": "auto"
+			},
+			"pluginVersion": "9.4.3",
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"temperature"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Temperature",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "#424242",
+								"value": null
+							},
+							{
+								"color": "#646464",
+								"value": 20
+							},
+							{
+								"color": "#868686",
+								"value": 50
+							},
+							{
+								"color": "#bbbbbb",
+								"value": 100
+							},
+							{
+								"color": "#e9e9e9",
+								"value": 300
+							},
+							{
+								"color": "#ffffff",
+								"value": 1000
+							},
+							{
+								"color": "super-light-yellow",
+								"value": 10000
+							},
+							{
+								"color": "yellow",
+								"value": 30000
+							}
+						]
+					},
+					"unit": "lux"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 6,
+				"x": 12,
+				"y": 0
+			},
+			"id": 14,
+			"links": [
+				{
+					"targetBlank": true,
+					"title": "Threshold values (https://en.wikipedia.org/wiki/Lux)",
+					"url": "https://en.wikipedia.org/wiki/Lux"
+				}
+			],
+			"options": {
+				"colorMode": "value",
+				"graphMode": "none",
+				"justifyMode": "auto",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"textMode": "auto"
+			},
+			"pluginVersion": "9.4.3",
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"lux"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Lighting",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "purple",
+								"value": null
+							}
+						]
+					},
+					"unit": "pressurehpa"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 6,
+				"x": 18,
+				"y": 0
+			},
+			"id": 16,
+			"options": {
+				"colorMode": "value",
+				"graphMode": "none",
+				"justifyMode": "auto",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"textMode": "auto"
+			},
+			"pluginVersion": "9.4.3",
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"pressure"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Pressure",
+			"type": "stat"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"custom": {
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"axisSoftMax": 80,
+						"axisSoftMin": 10,
+						"barAlignment": 0,
+						"drawStyle": "line",
+						"fillOpacity": 0,
+						"gradientMode": "scheme",
+						"hideFrom": {
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"lineInterpolation": "smooth",
+						"lineStyle": {
+							"fill": "solid"
+						},
+						"lineWidth": 2,
+						"pointSize": 7,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "auto",
+						"spanNulls": false,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "area"
+						}
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "yellow",
+								"value": null
+							},
+							{
+								"color": "green",
+								"value": 30
+							},
+							{
+								"color": "blue",
+								"value": 60
+							}
+						]
+					},
+					"unit": "humidity"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 11,
+				"w": 8,
+				"x": 0,
+				"y": 6
+			},
+			"id": 6,
+			"options": {
+				"legend": {
+					"calcs": [],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": false
+				},
+				"tooltip": {
+					"mode": "single",
+					"sort": "none"
+				}
+			},
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"humidity"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Humidity",
+			"type": "timeseries"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds",
+						"seriesBy": "last"
+					},
+					"custom": {
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"axisSoftMax": 40,
+						"axisSoftMin": -5,
+						"barAlignment": 0,
+						"drawStyle": "line",
+						"fillOpacity": 0,
+						"gradientMode": "scheme",
+						"hideFrom": {
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"lineInterpolation": "smooth",
+						"lineWidth": 2,
+						"pointSize": 7,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "auto",
+						"spanNulls": false,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "area"
+						}
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "dark-blue",
+								"value": null
+							},
+							{
+								"color": "blue",
+								"value": -10
+							},
+							{
+								"color": "super-light-blue",
+								"value": 0
+							},
+							{
+								"color": "yellow",
+								"value": 15
+							},
+							{
+								"color": "orange",
+								"value": 25
+							},
+							{
+								"color": "red",
+								"value": 35
+							},
+							{
+								"color": "dark-red",
+								"value": 40
+							}
+						]
+					},
+					"unit": "celsius"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 11,
+				"w": 8,
+				"x": 8,
+				"y": 6
+			},
+			"id": 8,
+			"options": {
+				"legend": {
+					"calcs": [],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": false
+				},
+				"tooltip": {
+					"mode": "single",
+					"sort": "none"
+				}
+			},
+			"pluginVersion": "9.4.3",
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"temperature"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Temperature",
+			"type": "timeseries"
+		},
+		{
+			"datasource": {
+				"type": "influxdb",
+				"uid": "aG3jfH_Vk"
+			},
+			"fieldConfig": {
+				"defaults": {
+					"color": {
+						"mode": "thresholds"
+					},
+					"custom": {
+						"axisCenteredZero": false,
+						"axisColorMode": "text",
+						"axisLabel": "",
+						"axisPlacement": "auto",
+						"axisSoftMax": 500,
+						"axisSoftMin": 50,
+						"barAlignment": 0,
+						"drawStyle": "line",
+						"fillOpacity": 0,
+						"gradientMode": "scheme",
+						"hideFrom": {
+							"legend": false,
+							"tooltip": false,
+							"viz": false
+						},
+						"lineInterpolation": "smooth",
+						"lineStyle": {
+							"fill": "solid"
+						},
+						"lineWidth": 2,
+						"pointSize": 7,
+						"scaleDistribution": {
+							"type": "linear"
+						},
+						"showPoints": "auto",
+						"spanNulls": false,
+						"stacking": {
+							"group": "A",
+							"mode": "none"
+						},
+						"thresholdsStyle": {
+							"mode": "area"
+						}
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "#424242",
+								"value": null
+							},
+							{
+								"color": "#646464",
+								"value": 20
+							},
+							{
+								"color": "#868686",
+								"value": 50
+							},
+							{
+								"color": "#bbbbbb",
+								"value": 100
+							},
+							{
+								"color": "#e9e9e9",
+								"value": 300
+							},
+							{
+								"color": "#ffffff",
+								"value": 1000
+							},
+							{
+								"color": "super-light-yellow",
+								"value": 10000
+							},
+							{
+								"color": "yellow",
+								"value": 30000
+							}
+						]
+					},
+					"unit": "lux"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 11,
+				"w": 8,
+				"x": 16,
+				"y": 6
+			},
+			"id": 12,
+			"links": [],
+			"options": {
+				"legend": {
+					"calcs": [],
+					"displayMode": "list",
+					"placement": "bottom",
+					"showLegend": false
+				},
+				"tooltip": {
+					"mode": "single",
+					"sort": "none"
+				}
+			},
+			"targets": [
+				{
+					"datasource": {
+						"type": "influxdb",
+						"uid": "aG3jfH_Vk"
+					},
+					"groupBy": [],
+					"measurement": "sensor",
+					"orderByTime": "ASC",
+					"policy": "default",
+					"refId": "A",
+					"resultFormat": "time_series",
+					"select": [
+						[
+							{
+								"params": [
+									"lux"
+								],
+								"type": "field"
+							}
+						]
+					],
+					"tags": []
+				}
+			],
+			"title": "Lighting",
+			"type": "timeseries"
+		}
+	],
+	"refresh": "5s",
+	"revision": 1,
+	"schemaVersion": 38,
+	"style": "dark",
+	"tags": [],
+	"templating": {
+		"list": []
+	},
+	"time": {
+		"from": "now-1h",
+		"to": "now"
+	},
+	"timepicker": {},
+	"timezone": "",
+	"title": "Overview",
+	"uid": "_rlYLGu4z",
+	"version": 28,
+	"weekStart": ""
+}
