@@ -7,8 +7,7 @@
 	 @date 2023-03-01
 **/
 
-#define EXAMPLE_TEXT "Template\n"
-#define DISPLAY_PAGES 3
+#define DISPLAY_PAGES 2
 
 #include "main.h"
 #include "led.hpp"
@@ -18,9 +17,6 @@
 #include "lorawan/encoding.hpp"
 #include "sensors/amb_light.hpp"
 #include "sensors/env_sensor.hpp"
-#include "sensors/gnss.hpp"
-#include "sensors/motion_sensor.hpp"
-#include "sensors/soil_sensor.hpp"
 
 // variable to keep a timestamp
 time_t timeout_display;
@@ -58,9 +54,6 @@ void setup()
 	initLoRaWan();
 	initAmbLight();
 	initEnvSensor();
-	initGNSS();
-	initMotionSensor();
-	initSoilSensor();
 
 	digitalWrite(LED_BLUE, LOW);
 	digitalWrite(LED_GREEN, HIGH);
@@ -70,11 +63,12 @@ void setup()
 	Serial.print("============================\n");
 	Serial.print("Hochschule Bonn-Rhein-Sieg\n");
 	Serial.print("Smart City: Sensorik und Netze\n");
-	Serial.print(EXAMPLE_TEXT);
+	Serial.print("Air Quality Monitoring\n");
 	Serial.printf("SW Version %d.%d.%d\n", SW_VERSION_1, SW_VERSION_2, SW_VERSION_3);
 	Serial.print("============================\n");
 
-	display.drawStr(0, 15, "Hello World!");
+	display.drawStr(0, 30, "Air Quality");
+	display.drawStr(0, 45, "Monitoring");
 	display.sendBuffer();
 
 	digitalWrite(LED_GREEN, LOW);
@@ -109,30 +103,26 @@ void loop()
 		if (display_paging == 0)
 		{
 			display.drawStr(0, 15, (std::to_string(amb_light.readResult().lux) + " Lux").c_str());
-			display.drawStr(0, 30, ("Motion = " + std::to_string(digitalRead(PIR_PIN))).c_str());
-			display.drawStr(0, 45, ("Soil = " + std::to_string(analogRead(SOIL_PIN) * (3.3 / 1023)) + " V").c_str());
+			display.drawStr(0, 30, (std::to_string(env_sensor.temperature) + " *C").c_str());
+			display.drawStr(0, 45, (std::to_string(env_sensor.humidity) + " %").c_str());
+			display.drawStr(0, 60, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
 		}
 		else if (display_paging == 1)
 		{
-			display.drawStr(0, 15, (std::to_string(env_sensor.temperature) + " *C").c_str());
-			display.drawStr(0, 30, (std::to_string(env_sensor.humidity) + " %").c_str());
-			display.drawStr(0, 45, (std::to_string(env_sensor.pressure / 100.0) + " hPa").c_str());
-		}
-		else if (display_paging == 2)
-		{
-			uint8_t fixType = gnss.getFixType();
-			if (fixType >= 2)
+			display.drawStr(0, 15, ("LoRa " + (std::string)(lora_isJoined ? "connected" : "failed")).c_str());
+			display.drawStr(0, 30, ("SF" + std::to_string(SX126x.ModulationParams.Params.LoRa.SpreadingFactor)).c_str());
+			display.drawStr(0, 45, ("Sent: " + std::to_string(lora_getMsgCount())).c_str());
+
+			uint32_t next_send = (uint32_t)(timeout_lora + LORA_LOOP_TIMEOUT - millis()) / 1000;
+			uint32_t next_send_min = next_send / 60;
+			std::string next_msg = "Next: ";
+			if (next_send_min > 0)
 			{
-				display.drawStr(0, 15, (std::to_string(gnss.getLatitude() * 10e-8) + " N").c_str());
-				display.drawStr(0, 30, (std::to_string(gnss.getLongitude() * 10e-8) + " E").c_str());
-				display.drawStr(0, 45, (std::to_string(gnss.getAltitude()) + " mm").c_str());
-				display.drawStr(0, 60, (std::to_string(gnss.getAltitudeMSL()) + " mm").c_str());
+				next_msg += std::to_string(next_send_min) + "min ";
 			}
-			else
-			{
-				display.drawStr(0, 15, "Insufficient");
-				display.drawStr(0, 30, ("FixType = " + std::to_string(fixType)).c_str());
-			}
+			next_msg += std::to_string(next_send % 60) + "s";
+			
+			display.drawStr(0, 60, next_msg.c_str());
 		}
 		display.sendBuffer();
 

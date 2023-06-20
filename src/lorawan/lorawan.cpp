@@ -46,6 +46,7 @@ void lora_has_joined_handler()
 void lora_join_failed_handler()
 {
 	MYLOG("LORAWAN", "OTAA join failed");
+	lora_isJoined = false;
 }
 
 void lora_rx_handler(lmh_app_data_t *appData)
@@ -98,4 +99,9 @@ void lora_send_data()
 		lora_msgFailCount++;
 		MYLOG("LORAWAN", "lmh_send failed - %lu", lora_msgFailCount);
 	}
+}
+
+uint32_t lora_getMsgCount()
+{
+	return lora_msgCount;
 }

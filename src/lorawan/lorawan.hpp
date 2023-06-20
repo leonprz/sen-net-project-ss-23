@@ -31,4 +31,6 @@ void lora_confirm_class_handler(DeviceClass_t);
 
 void lora_send_data();
 
+uint32_t lora_getMsgCount();
+
 #endif // LORAWAN_HPP
