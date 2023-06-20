@@ -8,6 +8,7 @@
 - [Software](#software)
   - [Payload Format](#payload-format)
   - [The Things Network (Fair Use Policy)](#the-things-network-fair-use-policy)
+  - [Grafana](#grafana)
 
 ---
 
@@ -94,3 +95,7 @@ Um diesem Limit zu entsprechen, wird die Übertragung der Daten auf eine Nachric
 
 Die Wartezeit zwischen den Nachrichten kann mit folgender Webseite berechnet werden:
 <https://avbentem.github.io/airtime-calculator/ttn/eu868/7>
+
+### Grafana
+
+Die Daten werden in Grafana visualisiert. Dazu muss eine InfluxDB Datenquelle angelegt werden. Anschließend können die Daten in einem Dashboard visualisiert werden. Das Dashboard ist in [grafana-dashboard.json](./grafana-dashboard.json) zu finden.
