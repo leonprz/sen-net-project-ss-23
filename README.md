@@ -42,9 +42,13 @@ Für eine Erklärung auf welche Weise die einzelnen Messwerte Einfluss auf die L
 
 Die Firmware für das WisBlock System wird mit PlatformIO erstellt. Dazu muss das Repository geklont werden und die PlatformIO CLI installiert sein. Anschließend muss die Firmware erstellt und auf das WisBlock System geflasht werden.
 
+```bash
+pio run --target upload
+```
+
 ### MQTT Client
 
-Als MQTT Client dient das Python Script [sennet-mqtt.py](./mqtt-client/sennet-mqtt.py), welches die TTN Nachrichten des MQTT Brokers entgegennimmt, verarbeitet und die extrahierten Daten in die Datenbank (InfluxDB) schreibt. Das Script setzt die Installation der in [requirements.txt](./mqtt-client/requirements.txt) gelisteten Pakete voraus.
+Als MQTT Client dient das Python Script [sennet-mqtt.py](./mqtt-client/sennet-mqtt.py), welches die [TTN](https://thethingsnetwork.org) Nachrichten des MQTT Brokers entgegennimmt, verarbeitet und die extrahierten Daten in die Datenbank (InfluxDB) schreibt. Das Script setzt die Installation der in [requirements.txt](./mqtt-client/requirements.txt) gelisteten Pakete voraus.
 
 Im Script müssen folgende Werte nutzerspezifisch angepasst werden:
 
