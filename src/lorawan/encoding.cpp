@@ -5,18 +5,14 @@
 
 uint24 encode_ambLight()
 {
-	float lux = amb_light.readResult().lux;
-
-	// to be changed
-
-	return (uint24)lux;
+	return (uint24)amb_light.readResult().lux;
 }
 
 uint32_t encode_envSensor()
 {
 	float temperature = env_sensor.temperature;
 	float humidity = env_sensor.humidity;
-	uint32_t pressure = env_sensor.pressure;
+	uint32_t pressure = env_sensor.pressure / 100;
 
 	uint32_t data = 0;
 	// 0-7: temperature
